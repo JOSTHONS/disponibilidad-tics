@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-    /* Paleta Cyberpunk */
     --bg-dark: #09090b;       
     --glass-dark: rgba(20, 20, 30, 0.6); 
     --neon-green: #00ffa3;    
@@ -27,7 +26,7 @@
 }
 
 html, body {
-    height: 100%; /* Asegura altura completa */
+    height: 100%;
 }
 
 body {
@@ -39,7 +38,20 @@ body {
     background-image: 
         radial-gradient(circle at 10% 20%, rgba(220, 0, 255, 0.15) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(0, 255, 163, 0.15) 0%, transparent 40%);
-    background-attachment: fixed;
+    
+    /* 🟢 FIX PARA IPHONE: El 'fixed' rompe iOS, lo dejamos en scroll por defecto */
+    background-attachment: scroll; 
+    
+    /* 🟢 FIX DE SEGURIDAD: Respetar los bordes del iPhone (Notch y barra inferior) */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Solo en PC activamos el fondo fijo bonito */
+@media (min-width: 769px) {
+    body {
+        background-attachment: fixed;
+    }
 }
 
 ::-webkit-scrollbar { width: 8px; }
@@ -71,14 +83,14 @@ body {
     margin: 20px auto;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Soporte iOS */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     min-height: 95vh;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     position: relative;
-    padding-bottom: 20px; /* Base padding */
+    padding-bottom: 20px;
 }
 
 /* --- NAVBAR --- */
@@ -89,6 +101,7 @@ body {
     margin: 0 20px;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* Soporte iOS */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
     padding: 0.8rem 1.5rem;
@@ -200,6 +213,7 @@ body {
 .screenshots-container {
     display: flex; gap: 20px; overflow-x: auto; padding: 1rem 0 2rem;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; /* Suavidad en iOS */
 }
 .screenshot-card {
     flex: 0 0 auto; width: 180px; height: 360px; border-radius: 20px;
@@ -299,23 +313,15 @@ body {
 
 /* --- FOOTER MÓVIL --- */
 .mobile-footer {
-    position: fixed; bottom: 20px; left: 20px; right: 20px;
-    /* Fondo más sólido para que no se mezcle */
-    background: rgba(9, 9, 11, 0.95); 
-    padding: 10px;
-    border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(20px); z-index: 40;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
-    /* 🟢 CAMBIO CLAVE: Oculto por defecto, se activa si queremos sticky */
-    display: none;
+    display: none; /* OCULTO POR DEFECTO EN EL PLAN NORMAL */
 }
 
 /* 🟢 MEDIA QUERY MÓVIL (LIMPIO Y ORDENADO) */
 @media (max-width: 768px) {
-    /* 1. Ocultamos el botón flotante pegajoso para siempre */
+    /* 1. Nos aseguramos que el sticky no moleste */
     .mobile-footer { display: none !important; }
     
-    /* 2. Forzamos a que el botón normal del Hero se muestre */
+    /* 2. Mostramos el botón normal */
     .hidden-mobile { display: block !important; }
     
     .hero-info h1 { font-size: 2rem; }
@@ -328,13 +334,16 @@ body {
         min-height: 100vh; 
         box-shadow: none;
         overflow: visible; 
-        /* 3. Quitamos el padding exagerado */
         padding-bottom: 2rem !important;
+        /* 🟢 FIX IPHONE: Asegurar que el fondo llegue hasta abajo */
+        background-attachment: scroll; 
     }
     
-    /* 4. Footer normal sin huecos raros */
+    /* Padding normal para que no se vea cortado */
     .footer {
-        padding-bottom: 3rem !important;
+        padding-bottom: 4rem !important; 
+        padding-left: 20px;
+        padding-right: 20px;
     }
     
     .section { padding: 1.5rem 1rem; }
