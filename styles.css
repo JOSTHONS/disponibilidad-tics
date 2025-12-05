@@ -31,8 +31,6 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-white);
     line-height: 1.6;
-    /* 🟢 FIX: Más espacio abajo para que el botón no tape el footer */
-    padding-bottom: 140px; 
     overflow-x: hidden;
     background-image: 
         radial-gradient(circle at 10% 20%, rgba(220, 0, 255, 0.15) 0%, transparent 40%),
@@ -322,6 +320,10 @@ body {
         border: none; 
         min-height: 100vh; 
         box-shadow: none;
+        
+        /* 🟢 EL FIX SUPREMO: Padding al final DEL CONTENEDOR */
+        /* Esto obliga al texto a no llegar hasta abajo */
+        padding-bottom: 140px !important;
     }
     
     /* Márgenes laterales más pequeños para ganar espacio */

@@ -267,7 +267,7 @@
                                     <div className="stat-value" key={downloadCount} style={{animation: 'pulseGreen 0.3s'}}>
                                         {downloadCount.toLocaleString()}
                                     </div>
-                                    <span className="stat-label">Usuarios Activos</span>
+                                    <span className="stat-label">Descargas</span>
                                 </div>
                                 <div className="stat-item">
                                     <div className="stat-value"><ShieldIcon size={18} /></div>
@@ -372,7 +372,7 @@
                                         </div>
                                         <input type="text" placeholder="Nombre completo" className="input-field" value={newReview.name} onChange={e => setNewReview({...newReview, name: e.target.value})} required />
                                         <textarea placeholder="Comentarios sobre el rendimiento..." className="input-field" style={{height: '100px', resize: 'none'}} value={newReview.text} onChange={e => setNewReview({...newReview, text: e.target.value})} required></textarea>
-                                        <button type="submit" className="btn-install btn-primary">Enviar Feedback</button>
+                                        <button type="submit" className="btn-install btn-primary">Enviar</button>
                                     </form>
                                 </div>
                             )}
