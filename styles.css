@@ -26,6 +26,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html, body {
+    height: 100%; /* Asegura altura completa */
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-dark);
@@ -74,6 +78,7 @@ body {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     position: relative;
+    padding-bottom: 20px; /* Base padding */
 }
 
 /* --- NAVBAR --- */
@@ -82,7 +87,7 @@ body {
     top: 20px;
     z-index: 50;
     margin: 0 20px;
-    background: rgba(0, 0, 0, 0.8); /* Un poco más oscuro para leer mejor */
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
@@ -209,17 +214,15 @@ body {
 }
 .screenshot-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
 
-/* --- VIDEO VERTICAL (Responsive Fix) --- */
+/* --- VIDEO VERTICAL --- */
 .video-section-container {
     display: flex;
     justify-content: center;
     padding-bottom: 1rem;
 }
 .mobile-video-frame {
-    /* 🟢 FIX: Ancho fluido para que no se salga en móviles pequeños */
     width: 100%; 
     max-width: 280px;
-    /* Relación de aspecto de celular 9:16 */
     aspect-ratio: 9 / 16;
     border-radius: 35px;
     overflow: hidden;
@@ -271,7 +274,7 @@ body {
     background: var(--gradient-main); color: #000;
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 1rem; box-shadow: 0 0 10px rgba(0, 255, 163, 0.4);
-    flex-shrink: 0; /* Para que el avatar no se aplaste */
+    flex-shrink: 0;
 }
 .reviewer-name { color: var(--text-white); font-weight: 700; }
 .review-text { color: #d1d5db; }
@@ -297,43 +300,40 @@ body {
 /* --- FOOTER MÓVIL --- */
 .mobile-footer {
     position: fixed; bottom: 20px; left: 20px; right: 20px;
-    background: rgba(20, 20, 30, 0.95); /* Más opaco */
+    /* Fondo más sólido para que no se mezcle */
+    background: rgba(9, 9, 11, 0.95); 
     padding: 10px;
     border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(20px); z-index: 40;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); display: none;
 }
 
-/* 🟢 MEDIA QUERY MÓVIL MEJORADO */
+/* 🟢 MEDIA QUERY MÓVIL (MANO PESADA) */
 @media (max-width: 768px) {
     .mobile-footer { display: block; }
     .hidden-mobile { display: none; }
     
-    /* Textos más pequeños para que quepan */
     .hero-info h1 { font-size: 2rem; }
     .section-title { font-size: 1.3rem; }
     
-    /* Layout pegado a los bordes en móvil */
     .container { 
         margin: 0; 
         border-radius: 0; 
         border: none; 
         min-height: 100vh; 
         box-shadow: none;
-        
-        /* 🟢 EL FIX SUPREMO: Padding al final DEL CONTENEDOR */
-        /* Esto obliga al texto a no llegar hasta abajo */
-        padding-bottom: 140px !important;
+        overflow: visible; /* IMPORTANTE: Permitir que el contenido fluya */
+        padding-bottom: 0 !important;
     }
     
-    /* Márgenes laterales más pequeños para ganar espacio */
+    /* ☢️ EL FIX NUCLEAR: Relleno gigante al footer para empujar el texto arriba */
+    .footer {
+        padding-bottom: 180px !important;
+    }
+    
     .section { padding: 1.5rem 1rem; }
     .hero { padding: 2rem 1rem; }
     .stats-grid { margin: 1.5rem 0.5rem; }
-    
-    /* Ajustes en Navbar */
     .navbar { top: 10px; margin: 0 10px; padding: 0.6rem 1rem; }
-    
-    /* Ajuste de video */
     .mobile-video-frame { max-width: 260px; }
 }
