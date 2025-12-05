@@ -305,13 +305,18 @@ body {
     padding: 10px;
     border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(20px); z-index: 40;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8); display: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
+    /* 🟢 CAMBIO CLAVE: Oculto por defecto, se activa si queremos sticky */
+    display: none;
 }
 
-/* 🟢 MEDIA QUERY MÓVIL (MANO PESADA) */
+/* 🟢 MEDIA QUERY MÓVIL (LIMPIO Y ORDENADO) */
 @media (max-width: 768px) {
-    .mobile-footer { display: block; }
-    .hidden-mobile { display: none; }
+    /* 1. Ocultamos el botón flotante pegajoso para siempre */
+    .mobile-footer { display: none !important; }
+    
+    /* 2. Forzamos a que el botón normal del Hero se muestre */
+    .hidden-mobile { display: block !important; }
     
     .hero-info h1 { font-size: 2rem; }
     .section-title { font-size: 1.3rem; }
@@ -322,13 +327,14 @@ body {
         border: none; 
         min-height: 100vh; 
         box-shadow: none;
-        overflow: visible; /* IMPORTANTE: Permitir que el contenido fluya */
-        padding-bottom: 0 !important;
+        overflow: visible; 
+        /* 3. Quitamos el padding exagerado */
+        padding-bottom: 2rem !important;
     }
     
-    /* ☢️ EL FIX NUCLEAR: Relleno gigante al footer para empujar el texto arriba */
+    /* 4. Footer normal sin huecos raros */
     .footer {
-        padding-bottom: 180px !important;
+        padding-bottom: 3rem !important;
     }
     
     .section { padding: 1.5rem 1rem; }
